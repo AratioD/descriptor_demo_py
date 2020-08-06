@@ -1,5 +1,9 @@
 
 class Numbers:
+    """
+    The class Numbers validates all integer based values in the module. 
+    Floats are not allowed nor negative integers.
+    """
     def __set_name__(self, owner_class, property_name):
         self.property_name = property_name
 
@@ -19,6 +23,10 @@ class Numbers:
 
 
 class ValidString:
+    """
+    The class ValidString validates that all string based values fills defined length and
+    there strings are only allowed datatype. 
+    """
     def __init__(self, min_lenght=None):
         self.min_lenght = min_lenght
 
@@ -47,7 +55,7 @@ class Register:
     horse_power = Numbers()
     torque = Numbers()
     transmission = ValidString(3)
-    consuption = ValidString(3)
+    consumption = ValidString(3)
 
 
 p = Register()
@@ -60,9 +68,9 @@ try:
     p.horse_power = 1200
     p.torque = 989
     p.transmission = "Automatic"
-    p.consuption = "23 Kw/H"
+    p.consumption = "23 Kw/H"
 except ValueError as ex:
     print(ex)
 
 
-print(p.first_name, p.last_name, "price-->", p.price, " ", p.horse_power, " ", p.torque, " ", p.transmission, " ", p.consuption)
+print(p.first_name, " ", p.last_name, " ", p.price, " ", p.horse_power, " ", p.torque, " ", p.transmission, " ", p.consumption)
