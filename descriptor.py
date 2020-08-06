@@ -1,8 +1,5 @@
 
 class Numbers:
-    # def __init__(self, small_int=None):
-    #     self.small_int = small_int
-
     def __set_name__(self, owner_class, property_name):
         self.property_name = property_name
 
