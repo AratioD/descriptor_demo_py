@@ -1,17 +1,21 @@
 """
 A descriptor demo software.
 """
+
+
 class Numbers:
     """
     The class Numbers validates all integer based values in the module. 
     Floats are not allowed nor negative integers.
     """
+
     def __set_name__(self, owner_class, property_name):
         self.property_name = property_name
 
     def __set__(self, instance, value):
         if not isinstance(value, int):
-            raise ValueError(f'ERROR!--> {self.property_name} VALUE MUST BE AN INTEGER!')
+            raise ValueError(
+                f'ERROR!--> {self.property_name} VALUE MUST BE AN INTEGER!')
         if value < 0:
             raise ValueError(
                 f'ERROR!--> {self.property_name} VALUE NEEDS TO BE POSITIVE INTEGER!'
@@ -29,6 +33,7 @@ class ValidString:
     The class ValidString validates that all string based values fills defined length and
     there strings are only allowed datatype. 
     """
+
     def __init__(self, min_lenght=None):
         self.min_lenght = min_lenght
 
@@ -61,6 +66,7 @@ class Register:
 
 
 p = Register()
+p1 = Register()
 
 
 try:
@@ -73,6 +79,34 @@ try:
     p.consumption = "23 Kw/H"
 except ValueError as ex:
     print(ex)
+    
+try:
+    p1.first_name = "Mellanie"
+    p1.last_name = "Bauer"
+    p1.price = 150000
+    p1.horse_power = 788
+    p1.torque = 699
+    p1.transmission = "Automatic"
+    p1.consumption = "39 Kw/H"
+except ValueError as ex:
+    print(ex)
 
 
-print(p.first_name, " ", p.last_name, " ", p.price, " ", p.horse_power, " ", p.torque, " ", p.transmission, " ", p.consumption)
+
+# Memory addresses of "p" object
+print(hex(id(p)))
+print(hex(id(p.first_name)))
+print(hex(id(p.transmission)))
+
+print("**************************")
+
+# Memory addresses of "p1" object
+print(hex(id(p1)))
+print(hex(id(p1.first_name)))
+print(hex(id(p1.transmission)))
+
+print(p.__dict__)
+print(p1.__dict__)
+
+print(p.first_name, " ", p.last_name, " ", p.price, " ", p.horse_power,
+      " ", p.torque, " ", p.transmission, " ", p.consumption)
