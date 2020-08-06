@@ -1,4 +1,6 @@
-
+"""
+A descriptor demo software.
+"""
 class Numbers:
     """
     The class Numbers validates all integer based values in the module. 
