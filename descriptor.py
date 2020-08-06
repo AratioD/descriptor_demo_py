@@ -1,26 +1,17 @@
 
-class Spec:
-    pass
-
-class Pricing:
-    pass
-
-class Car:
-    pass
-
 class Numbers:
-    def __init__(self, small_int=None):
-        self.small_int = small_int
+    # def __init__(self, small_int=None):
+    #     self.small_int = small_int
 
     def __set_name__(self, owner_class, property_name):
         self.property_name = property_name
 
     def __set__(self, instance, value):
         if not isinstance(value, int):
-            raise ValueError(f'{self.property_name} must be a integer')
-        if self.small_int is not None and self.small_int > 0:
+            raise ValueError(f'ERROR!--> {self.property_name} VALUE MUST BE AN INTEGER!')
+        if value < 0:
             raise ValueError(
-                f'{self.property_name} must be at least {self.small_int} characters.'
+                f'ERROR!--> {self.property_name} VALUE NEEDS TO BE POSITIVE INTEGER!'
             )
         instance.__dict__[self.property_name] = value
 
@@ -28,6 +19,7 @@ class Numbers:
         if instance is None:
             return self
         return instance.__dict__.get(self.property_name, None)
+
 
 class ValidString:
     def __init__(self, min_lenght=None):
@@ -49,24 +41,31 @@ class ValidString:
         if instance is None:
             return self
         return instance.__dict__.get(self.property_name, None)
-    
-
-class Owner:
-    first_name = ValidString(3)
-    last_name = ValidString(3)
-    price = Numbers(0)
-    
 
 
-p = Owner()
+class Register:
+    first_name = ValidString(2)
+    last_name = ValidString(2)
+    price = Numbers()
+    horse_power = Numbers()
+    torque = Numbers()
+    transmission = ValidString(3)
+    consuption = ValidString(3)
+
+
+p = Register()
 
 
 try:
     p.first_name = "Jack"
     p.last_name = "Bauer"
-    p.price(3)
+    p.price = 200000
+    p.horse_power = 1200
+    p.torque = 989
+    p.transmission = "Automatic"
+    p.consuption = "23 Kw/H"
 except ValueError as ex:
     print(ex)
-    
-    
-print(p.first_name, p.last_name)
+
+
+print(p.first_name, p.last_name, "price-->", p.price, " ", p.horse_power, " ", p.torque, " ", p.transmission, " ", p.consuption)
